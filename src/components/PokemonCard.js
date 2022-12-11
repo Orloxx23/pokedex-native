@@ -8,15 +8,17 @@ import {
 import React from "react";
 import getColorType from "../utils/getColorType";
 import { capitalize } from "lodash";
+import { useNavigation } from "@react-navigation/native";
 
 export default function PokemonCard(props) {
   const { pokemon } = props;
+  const navigation = useNavigation();
 
   const pokemonColor = getColorType(pokemon.type);
   const bgStyles = { backgroundColor: pokemonColor, ...styles.bgStyles };
 
   const goToPokemon = () => {
-    console.log("Go to pokemon: " + pokemon.name);
+    navigation.navigate("Pokemon", { id: pokemon.id });
   };
 
   return (
@@ -24,7 +26,7 @@ export default function PokemonCard(props) {
       <View style={styles.card}>
         <View style={styles.spacing}>
           <View style={bgStyles}>
-            <Text style={styles.number}>#{`${pokemon.order}`.padStart(3, 0)}</Text>
+            <Text style={styles.number}>#{`${pokemon.id}`.padStart(3, 0)}</Text>
             <Text style={styles.name}>{capitalize(pokemon.name)}</Text>
             <Image source={{ uri: pokemon.image }} style={styles.image} />
           </View>
