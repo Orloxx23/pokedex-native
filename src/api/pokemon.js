@@ -10,3 +10,13 @@ export async function getPokemons() {
     throw error;
   }
 }
+
+export async function getPokemonDetails(url) {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
