@@ -1,3 +1,5 @@
 import Header from "./Header";
+import Type from "./Type";
+import Stats from "./Stats";
 
-export { Header };
+export { Header, Type, Stats };
