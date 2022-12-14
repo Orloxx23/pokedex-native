@@ -2,15 +2,21 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { map, capitalize } from "lodash";
 
-import getColorType from "../../utils/getColorType"
+import getColorType from "../../utils/getColorType";
 
 export default function Type(props) {
   const { types } = props;
   return (
     <View style={styles.content}>
       {map(types, (item, index) => (
-        <View key={index} style={{...styles.pill, backgroundColor: getColorType(item.type.name)}}>
-          <Text>{capitalize(item.type.name)}</Text>
+        <View
+          key={index}
+          style={{
+            ...styles.pill,
+            backgroundColor: getColorType(item.type.name),
+          }}
+        >
+          <Text style={styles.pillText}>{capitalize(item.type.name)}</Text>
         </View>
       ))}
     </View>
@@ -19,7 +25,7 @@ export default function Type(props) {
 
 const styles = StyleSheet.create({
   content: {
-    marginTop: 50,
+    marginTop: 20,
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
@@ -29,5 +35,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 50,
     marginHorizontal: 10,
+  },
+  pillText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

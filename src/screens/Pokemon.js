@@ -1,9 +1,11 @@
-import { ScrollView as View, Text } from "react-native";
+import { ScrollView as View } from "react-native";
 import React, { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { getPokemonByID } from "../api/pokemon";
-import { Header, Type, Stats } from "../components/Pokemon";
+import { Header, Type, Stats, Evolutions } from "../components/Pokemon";
+import { capitalize } from "lodash";
+import getColorType from "../utils/getColorType";
 
 export default function Pokemon(props) {
   const {
@@ -26,12 +28,9 @@ export default function Pokemon(props) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Icon
-      name="heart"
-      color="#fff"
-      size={20}
-      style={{ marginRight: 20 }}
-    />,
+      headerRight: () => (
+        <Icon name="heart" color="#fff" size={20} style={{ marginRight: 20 }} />
+      ),
       headerLeft: () => (
         <Icon
           name="arrow-left"
@@ -55,7 +54,8 @@ export default function Pokemon(props) {
         type={pokemon.types[0].type.name}
       />
       <Type types={pokemon.types} />
-      <Stats stats={pokemon.stats} />
+      <Stats stats={pokemon.stats} type={pokemon.types[0].type.name} />
+      <Evolutions species={pokemon.species.url} type={pokemon.types[0].type.name} />
     </View>
   );
 }

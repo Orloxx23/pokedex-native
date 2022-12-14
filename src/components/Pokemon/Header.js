@@ -11,14 +11,19 @@ export default function Header(props) {
 
   return (
     <>
-      <View style={bgStyle} />
+      <View style={bgStyle}></View>
       <SafeAreaView style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.name}>{capitalize(name)}</Text>
           <Text style={styles.number}>#{`${id}`.padStart(3, 0)}</Text>
         </View>
+        <Image
+          source={require("../../assets/pokeballT.png")}
+          style={styles.pokeball}
+        />
         <View style={styles.contentImg}>
           <Image source={{ uri: image }} style={styles.image} />
+          <Text></Text>
         </View>
       </SafeAreaView>
     </>
@@ -28,40 +33,50 @@ export default function Header(props) {
 const styles = StyleSheet.create({
   bg: {
     width: "100%",
-    height: 400,
+    height: 300,
     position: "absolute",
-    borderBottomEndRadius: 300,
-    borderBottomLeftRadius: 300,
-    transform: [{ scaleX: 2 }],
+    borderBottomEndRadius: 50,
+    borderBottomLeftRadius: 50,
   },
   content: {
     marginHorizontal: 20,
     marginTop: 30,
   },
   header: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 40,
   },
-  name:{
+  name: {
+    position: "absolute",
+    top: 67,
     color: "#fff",
+    fontSize: 30,
     fontWeight: "bold",
-    fontSize: 27
   },
-  number:{
+  number: {
+    position: "absolute",
+    top: 110,
     color: "#fff",
     fontWeight: "bold",
   },
   contentImg: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    top: 30,
+    alignItems: "center",
+    top: 60,
   },
   image: {
     width: 250,
     height: 300,
+    resizeMode: "contain",
+  },
+  pokeball: {
+    position: "absolute",
+    alignSelf: "center",
+    width: "80%",
+    height: "80%",
     resizeMode: "contain",
   },
 });
