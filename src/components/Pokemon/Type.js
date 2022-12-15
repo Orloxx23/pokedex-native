@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 50,
     marginHorizontal: 10,
+    height: 30,
   },
   pillText: {
     color: "#fff",

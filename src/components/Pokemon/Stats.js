@@ -35,7 +35,7 @@ export default function Stats(props) {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 50,
   },
   title: {

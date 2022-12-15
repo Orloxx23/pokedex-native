@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { getPokemonByID } from "../api/pokemon";
-import { Header, Type, Stats, Evolutions } from "../components/Pokemon";
-import { capitalize } from "lodash";
-import getColorType from "../utils/getColorType";
+import {
+  Header,
+  Type,
+  Stats,
+  Evolutions,
+  Favorite,
+  About,
+} from "../components/Pokemon";
+import useAuth from "../hooks/useAuth";
 
 export default function Pokemon(props) {
   const {
@@ -13,6 +19,7 @@ export default function Pokemon(props) {
     route: { params },
   } = props;
   const [pokemon, setPokemon] = useState(null);
+  const { auth } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -28,9 +35,7 @@ export default function Pokemon(props) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Icon name="heart" color="#fff" size={20} style={{ marginRight: 20 }} />
-      ),
+      headerRight: () => auth && <Favorite pokemonId={pokemon?.id} />,
       headerLeft: () => (
         <Icon
           name="arrow-left"
@@ -41,7 +46,7 @@ export default function Pokemon(props) {
         />
       ),
     });
-  }, [navigation, params]);
+  }, [navigation, params, pokemon]);
 
   if (!pokemon) return null;
 
@@ -54,8 +59,17 @@ export default function Pokemon(props) {
         type={pokemon.types[0].type.name}
       />
       <Type types={pokemon.types} />
+      <About
+        weight={pokemon.weight}
+        height={pokemon.height}
+        type={pokemon.types[0].type.name}
+        moves={pokemon.moves}
+      />
       <Stats stats={pokemon.stats} type={pokemon.types[0].type.name} />
-      <Evolutions species={pokemon.species.url} type={pokemon.types[0].type.name} />
+      <Evolutions
+        species={pokemon.species.url}
+        type={pokemon.types[0].type.name}
+      />
     </View>
   );
 }

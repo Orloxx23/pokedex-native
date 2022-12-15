@@ -1,44 +1,16 @@
 import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { getPokemons, getPokemonDetails } from "../api/pokemon";
 import PokemonCard from "./PokemonCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function PokemonList() {
-  const [pokemons, setPokemons] = useState([]);
-  const [nextUrl, setNextUrl] = useState(null);
+export default function PokemonList(props) {
+  const { pokemons, loadPokemons, isNext } = props;
 
   const loadMore = () => {
     loadPokemons();
   };
 
-  useEffect(() => {
-    (async () => {
-      await loadPokemons();
-    })();
-  }, []);
-
-  const loadPokemons = async () => {
-    try {
-      const res = await getPokemons(nextUrl);
-      setNextUrl(res.next);
-      const pokemonsArrays = [];
-      for await (const pokemon of res.results) {
-        const pokemonDetails = await getPokemonDetails(pokemon.url);
-        pokemonsArrays.push({
-          id: pokemonDetails.id,
-          name: pokemonDetails.name,
-          type: pokemonDetails.types[0].type.name,
-          order: pokemonDetails.order,
-          image: pokemonDetails.sprites.other["official-artwork"].front_default,
-        });
-      }
-      setPokemons([...pokemons, ...pokemonsArrays]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <SafeAreaView>
       <FlatList
@@ -48,10 +20,10 @@ export default function PokemonList() {
         keyExtractor={(pokemon) => String(pokemon.id)}
         renderItem={({ item }) => <PokemonCard pokemon={item} />}
         contentContainerStyle={styles.flatListContentContainer}
-        onEndReached={nextUrl && loadMore}
+        onEndReached={isNext && loadMore}
         onEndReachedThreshold={0.1}
         ListFooterComponent={
-          nextUrl && (
+          isNext && (
             <ActivityIndicator
               size="large"
               style={styles.spinner}
