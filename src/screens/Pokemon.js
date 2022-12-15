@@ -46,7 +46,7 @@ export default function Pokemon(props) {
         />
       ),
     });
-  }, [navigation, params, pokemon]);
+  }, [navigation, params, pokemon, auth]);
 
   if (!pokemon) return null;
 
