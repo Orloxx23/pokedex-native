@@ -8,12 +8,12 @@ import { FavoritesNavigation, PokedexNavigation, AccountNavigation } from "./";
 const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Pokedex">
       <Tab.Screen
         name="Favorites"
         component={FavoritesNavigation}
         options={{
-          tabBarLabel: "Favoritos",
+          //tabBarLabel: "Favoritos",
           tabBarIcon: ({ color, size }) => (
             <Icon name="heart" color={color} size={size} />
           ),
@@ -31,7 +31,7 @@ export default function Navigation() {
         name="Account"
         component={AccountNavigation}
         options={{
-          tabBarLabel: "Cuenta",
+          //tabBarLabel: "Cuenta",
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" color={color} size={size} />
           ),

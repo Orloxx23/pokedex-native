@@ -2,12 +2,11 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  ToastAndroid
+  View
 } from "react-native";
 import React from "react";
 
 import PokemonCard from "./PokemonCard";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PokemonList(props) {
   const { pokemons, loadPokemons, isNext, isSearching } = props;
@@ -17,7 +16,7 @@ export default function PokemonList(props) {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <FlatList
         data={pokemons}
         numColumns={2}
@@ -37,7 +36,7 @@ export default function PokemonList(props) {
           )
         }
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
