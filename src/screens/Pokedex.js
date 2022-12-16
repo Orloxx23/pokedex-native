@@ -1,5 +1,5 @@
 import { SafeAreaView as View, ToastAndroid } from "react-native";
-import Toast from "react-native-toast-message";
+import Toast, { BaseToast } from "react-native-toast-message";
 import React, { useState, useEffect } from "react";
 import { Searchbar } from "react-native-paper";
 
@@ -13,6 +13,24 @@ export default function Pokedex() {
   const [isSearching, setIsSearching] = useState(false);
 
   const [searchQuery, setSearchQuery] = React.useState("");
+
+  const toastConfig = {
+    info: (props) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: "white", backgroundColor: "#444",  }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: "bold",
+          color: "white"
+        }}
+        text2Style={{
+          fontSize: 11,
+        }}
+      />
+    ),
+  };
 
   useEffect(() => {
     (async () => {
@@ -32,7 +50,7 @@ export default function Pokedex() {
     ToastAndroid.showWithGravity(
       "🐱 Loading pokemons, this may take a while ⏳",
       ToastAndroid.LONG,
-      ToastAndroid.CENTER
+      ToastAndroid.BOTTOM
     );
   };
 
@@ -76,14 +94,25 @@ export default function Pokedex() {
   };
 
   return (
-    <>
-      <Toast position="bottom" bottomOffset={30} />
+    <View style={{ backgroundColor: "#333", minHeight: "100%" }}>
+      <Toast position="bottom" bottomOffset={30} config={toastConfig} />
       <View>
         <Searchbar
           placeholder="Search"
           onChangeText={onChangeSearch}
           value={pokemons.length > 0 ? searchQuery : "Loading..."}
-          style={{ paddingTop: 30 }}
+          iconColor="#aaa"
+          inputStyle={{ color: "#fff" }}
+          style={{
+            paddingTop: 20,
+            backgroundColor: "#444",
+            color: "#fff",
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+          }}
         />
         <PokemonList
           pokemons={pokemonsFilter}
@@ -92,6 +121,6 @@ export default function Pokedex() {
           isSearching={isSearching}
         />
       </View>
-    </>
+    </View>
   );
 }

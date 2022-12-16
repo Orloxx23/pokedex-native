@@ -27,7 +27,7 @@ export default function Pokemon(props) {
       y: 0,
       animated: true,
     });
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -58,10 +58,8 @@ export default function Pokemon(props) {
 
   if (!pokemon) return null;
 
-  
-
   return (
-    <View ref={scrollRef}>
+    <View ref={scrollRef} style={{ backgroundColor: "#333" }}>
       <Header
         name={pokemon.name}
         id={pokemon.id}

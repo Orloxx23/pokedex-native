@@ -10,7 +10,11 @@ export default function AccountNavigation() {
       <Stack.Screen
         name="Account"
         component={Account}
-        //options={{ title: "Cuenta" }}
+        options={{
+          title: "Account",
+          headerTitleStyle: { color: "white" },
+          headerStyle: { backgroundColor: "#444" },
+        }}
       />
     </Stack.Navigator>
   );

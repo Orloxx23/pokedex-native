@@ -16,7 +16,7 @@ export default function PokemonList(props) {
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: "#333" }}>
       <FlatList
         data={pokemons}
         numColumns={2}

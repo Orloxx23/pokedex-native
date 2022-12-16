@@ -8,7 +8,7 @@ import { FavoritesNavigation, PokedexNavigation, AccountNavigation } from "./";
 const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
-    <Tab.Navigator initialRouteName="Pokedex">
+    <Tab.Navigator initialRouteName="Pokedex" tabBarOptions={{ activeBackgroundColor: "#484848", inactiveBackgroundColor: "#444", activeTintColor: "white" }}>
       <Tab.Screen
         name="Favorites"
         component={FavoritesNavigation}

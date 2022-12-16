@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     height: 50,
     fontSize: 12,
-    color: "#666666",
+    color: "#999",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     marginTop: 2,
     fontSize: 16,
-    color: "#000",
+    color: "#fff",
   },
   movesT: {
     textAlign: "center",

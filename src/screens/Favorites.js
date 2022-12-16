@@ -5,6 +5,7 @@ import { getPokemonByID } from "../api/pokemon";
 import useAuth from "../hooks/useAuth";
 import PokemonList from "../components/PokemonList";
 import NoLogged from "../components/Auth/NoLogged";
+import { View } from "react-native";
 
 export default function Favorites() {
   const [pokemons, setPokemons] = useState([]);
@@ -40,5 +41,9 @@ export default function Favorites() {
     }, [auth])
   );
 
-  return !auth ? <NoLogged /> : <PokemonList pokemons={pokemons} />;
+  return (
+    <View style={{backgroundColor: "#333", paddingBottom: 80, minHeight: "100%" }}>
+      {!auth ? <NoLogged /> : <PokemonList pokemons={pokemons} />}
+    </View>
+  );
 }

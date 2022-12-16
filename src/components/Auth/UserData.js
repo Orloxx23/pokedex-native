@@ -41,8 +41,8 @@ export default function UserData() {
 
       <Button
         mode="contained"
-        buttonColor="#000"
-        textColor="#fff"
+        buttonColor="#fff"
+        textColor="#333"
         textDecorationLine="underline line-through"
         onPress={logout}
         style={styles.btnLogout}
@@ -59,36 +59,43 @@ function ItemMenu(props) {
   return (
     <View style={styles.itemMenu}>
       <Text style={styles.itemMenuTitle}>{title}:</Text>
-      <Text>{text}</Text>
+      <Text style={{color: "white"}}>{text}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    marginHorizontal: 20,
-    marginTop: 20,
+    backgroundColor: "#333",
+    width: "100%",
+    height: "100%",
+    padding: 20,
   },
   titleBlock: {
     marginBottom: 30,
+  
   },
   title: {
     fontWeight: "bold",
     fontSize: 22,
+    color: "#fff",
   },
   dataContent: {
     marginBottom: 20,
+    color: "#fff",
   },
   itemMenu: {
     flexDirection: "row",
     paddingVertical: 20,
     borderBottomWidth: 1,
     borderColor: "#CFCFCF",
+    color: "#fff",
   },
   itemMenuTitle: {
     fontWeight: "bold",
     paddingRight: 10,
     width: 120,
+    color: "#fff",
   },
   btnLogout: {
     paddingRight: 10,

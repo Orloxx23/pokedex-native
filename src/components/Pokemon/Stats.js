@@ -64,9 +64,11 @@ const styles = StyleSheet.create({
   number: {
     width: "12%",
     fontSize: 14,
+    color: "#aaa",
   },
   bgBar: {
-    backgroundColor: "#dedede",
+    //backgroundColor: "#dedede",
+    backgroundColor: "#eee",
     width: "88%",
     height: 10,
     borderRadius: 20,
