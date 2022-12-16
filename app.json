@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#333"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.pokedexnative",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "870e9d99-cf66-4f75-94da-1712262c428d"
+      }
     }
   }
 }
