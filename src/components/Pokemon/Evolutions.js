@@ -14,12 +14,15 @@ import { getPokemonByID } from "../../api/pokemon";
 import { capitalize } from "lodash";
 
 export default function Evolutions(props) {
-  const { species, type } = props;
+  const { species, type, onPressTouch } = props;
   const [evolutions, setEvolutions] = React.useState([]);
   const navigation = useNavigation();
 
   const goToPokemon = (id) => {
     navigation.navigate("Pokemon", { id: id });
+    setTimeout(() => {
+      onPressTouch();
+    }, 1000);
   };
 
   const getRequest = async (url) => {
