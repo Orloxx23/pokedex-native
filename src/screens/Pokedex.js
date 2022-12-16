@@ -16,31 +16,40 @@ export default function Pokedex() {
 
   useEffect(() => {
     (async () => {
-      //showToast()
+      //showToast();
       Toast.show({
         type: "info",
-        text1: "This is an info message",
+        text1: "Loading pokemons",
+        text2: "This may take a while  ⏳",
+        autoHide: false,
       });
       await loadPokemons();
+      Toast.hide();
     })();
   }, []);
 
-  // const showToast = () => {
-  //   ToastAndroid.show("Cargando pokemons", ToastAndroid.LONG, ToastAndroid.CENTER);
-  // };
+  const showToast = () => {
+    ToastAndroid.showWithGravity(
+      "🐱 Loading pokemons, this may take a while ⏳",
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER
+    );
+  };
 
   const onChangeSearch = (query) => {
     setSearchQuery(query);
-    if (query === "" || query.length === 0) {
-      setPokemonsFilter(pokemons);
-      setIsSearching(false);
-    } else {
-      setIsSearching(true);
-      const search = searchQuery.toLowerCase();
-      const tempPokemonsFilter = pokemons.filter((pokemon) =>
-        pokemon.name.includes(search)
-      );
-      setPokemonsFilter(tempPokemonsFilter);
+    if (pokemons.length > 0) {
+      if (query === "" || query.length === 0) {
+        setPokemonsFilter(pokemons);
+        setIsSearching(false);
+      } else {
+        setIsSearching(true);
+        const search = searchQuery.toLowerCase();
+        const tempPokemonsFilter = pokemons.filter((pokemon) =>
+          pokemon.name.includes(search)
+        );
+        setPokemonsFilter(tempPokemonsFilter);
+      }
     }
   };
 
@@ -67,19 +76,22 @@ export default function Pokedex() {
   };
 
   return (
-    <View>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        style={{ paddingTop: 30 }}
-      />
-      <PokemonList
-        pokemons={pokemonsFilter}
-        loadPokemons={loadPokemons}
-        isNext={nextUrl}
-        isSearching={isSearching}
-      />
-    </View>
+    <>
+      <Toast position="bottom" bottomOffset={30} />
+      <View>
+        <Searchbar
+          placeholder="Search"
+          onChangeText={onChangeSearch}
+          value={pokemons.length > 0 ? searchQuery : "Loading..."}
+          style={{ paddingTop: 30 }}
+        />
+        <PokemonList
+          pokemons={pokemonsFilter}
+          loadPokemons={loadPokemons}
+          isNext={nextUrl}
+          isSearching={isSearching}
+        />
+      </View>
+    </>
   );
 }
