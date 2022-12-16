@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Button,
-  Keyboard,
-} from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Button, TextInput } from "react-native-paper";
+
 import { user, userDetails } from "../../utils/userDB";
 import useAuth from "../../hooks/useAuth";
 
@@ -25,7 +20,7 @@ export default function LoginForm() {
       const { username, password } = formValue;
 
       if (username !== user.username || password !== user.password) {
-        setError("El usuario o la contraseña no son correcto");
+        setError("The username or password is not correct");
       } else {
         login(userDetails);
       }
@@ -33,24 +28,50 @@ export default function LoginForm() {
   });
 
   return (
-    <View>
-      <Text style={styles.title}>Iniciar sesión</Text>
+    <View style={styles.content}>
+      <Image
+        source={require("../../assets/pokebalTBlack.png")}
+        style={{ width: 75, height: 75, marginTop: 80 }}
+      />
+      <Text style={styles.title}>Welcome back</Text>
       <TextInput
-        placeholder="Nombre de usuario"
+        label="Username"
+        mode="outlined"
+        outlineColor="#666"
+        activeOutlineColor="#666"
+        backgroundColor="#666"
+        textColor="#fff"
+        underlineColor="#fff"
+        activeUnderlineColor="#fff"
         style={styles.input}
         autoCapitalize="none"
         value={formik.values.username}
         onChangeText={(text) => formik.setFieldValue("username", text)}
       />
       <TextInput
-        placeholder="Contraseña"
+        label="Password"
+        mode="outlined"
+        outlineColor="#666"
+        activeOutlineColor="#666"
+        backgroundColor="#666"
+        textColor="#fff"
         style={styles.input}
         autoCapitalize="none"
         secureTextEntry={true}
         value={formik.values.password}
         onChangeText={(text) => formik.setFieldValue("password", text)}
       />
-      <Button title="Entrar" onPress={formik.handleSubmit} />
+      <View style={styles.button}>
+        <Button
+          mode="contained"
+          buttonColor="#fff"
+          textColor="#333"
+          textDecorationLine="underline line-through"
+          onPress={formik.handleSubmit}
+        >
+          LOGIN
+        </Button>
+      </View>
 
       <Text style={styles.error}>{formik.errors.username}</Text>
       <Text style={styles.error}>{formik.errors.password}</Text>
@@ -69,29 +90,42 @@ function initialValues() {
 
 function validationSchema() {
   return {
-    username: Yup.string().required("El usuario es obligatorio"),
-    password: Yup.string().required("La contraseña es obligatoria"),
+    username: Yup.string().required("The user is required."),
+    password: Yup.string().required("password is required."),
   };
 }
 
 const styles = StyleSheet.create({
+  content: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#333",
+  },
   title: {
     textAlign: "center",
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: "bold",
-    marginTop: 50,
     marginBottom: 15,
+    marginTop: 0,
+    color: "white",
   },
   input: {
-    height: 40,
+    //height: 50,
+    width: "80%",
     margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
   },
   error: {
     textAlign: "center",
     color: "#f00",
     marginTop: 20,
+  },
+  button: {
+    marginTop: 20,
+    marginRight: "3%",
+    marginLeft: "3%",
+    width: "80%",
   },
 });
