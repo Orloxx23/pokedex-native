@@ -9,7 +9,7 @@ export default function Stats(props) {
   const barStyles = (number) => {
     return {
       backgroundColor: color,
-      width: `${number/3}%`,
+      width: `${number/2.55}%`,
     };
   };
   return (
