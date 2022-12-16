@@ -10,7 +10,7 @@ import PokemonCard from "./PokemonCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PokemonList(props) {
-  const { pokemons, loadPokemons, isNext } = props;
+  const { pokemons, loadPokemons, isNext, isSearching } = props;
 
   const loadMore = () => {
     loadPokemons();
@@ -25,10 +25,10 @@ export default function PokemonList(props) {
         keyExtractor={(pokemon) => String(pokemon.id)}
         renderItem={({ item }) => <PokemonCard pokemon={item} />}
         contentContainerStyle={styles.flatListContentContainer}
-        onEndReached={isNext && loadMore}
+        onEndReached={!isSearching && isNext && loadMore}
         onEndReachedThreshold={0.1}
         ListFooterComponent={
-          isNext && (
+          !isSearching && isNext && (
             <ActivityIndicator
               size="large"
               style={styles.spinner}
